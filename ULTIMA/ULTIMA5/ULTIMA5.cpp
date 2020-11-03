@@ -42,15 +42,68 @@ int main()
         {
             edit_Stat(player * 0x20, stat_Value);
         }
-                    //test codew       edit_Stat(player*0x20, 990); //hp edit? 
+        //test codew       edit_Stat(player*0x20, 990); //hp edit? 
         break;
     case 2:
+        int item_Input, inventory_Value;
         cout << "You have chosen to edit your inventory" << endl;
-        cout << "What would you like to edit? Type the item you want to edit: gold, keys, skull keys, gems, black badge, magic carpets, magic axes" << endl;
+        cout << "What would you like to edit? Type the item you want to edit: 1 for gold, 2 for keys, 3 for skull keys, 4 for gems, 5 for black badge, 6 for magic carpets, 7 for magic axes" << endl;
+        cin >> item_Input;
+        if (item_Input == 1)
+        {
+            cout << "How much gold do you want? MAX 9999" << endl;
+            cin >> inventory_Value;
+            if (inventory_Value > 9999)
+            {
+                cout << "Invalid amount, max amount allocated" << endl;
+                inventory_Value = 9999;
+            }
+        }
+        else if (item_Input == 2 || item_Input == 3 || item_Input == 4)
+        {
+            cout << "How many of each? MAX 100" << endl; //run check so doesnt go over values 
+            cin >> inventory_Value;
+            if (inventory_Value > 100)
+            {
+                cout << "Invalid amount, max amount allocated" << endl;
+                inventory_Value = 100;
+            }
+        }
+        else if (item_Input == 5 || item_Input == 6) //badge and carpet? booleans 
+        {
+            int yes_no;
+            cout << "Do you want the item? Type 1 for Yes, 2 for No" << endl;
+            cin >> yes_no;
+            if (yes_no == 1)
+            {
+                inventory_Value = 0xff;
+            }
+            else
+            {
+                inventory_Value = 0x00;
+            }
+        }
+        else if (item_Input == 7)
+        {
+            cout << "How many magic axes do you want? MAX 10" << endl;
+            cin >> inventory_Value;
+            if (inventory_Value > 10)
+            {
+                cout << "Invalid amount, max amount allocated" << endl;
+                inventory_Value = 10;
+            }
+        }
+        else //default check 
+        {
+            cout << "Invalid entry. Try Again." << endl;
+        }
+        
         // insert method here 
+        edit_Inventory(item_Input, inventory_Value);
         break;
     case 3:
         //insert method here 
+        max_All();
         cout << "You have maxed your stats and inventory!" << endl;
 
     default:
@@ -62,7 +115,7 @@ int main()
 
 void edit_Stat(int character_input, int stat_Value) //edit hp? 
 {
-    char test_hp = 0x3DE;
+         char test_hp = 0x3DE;
     string stat_input;
     int location = 0;
     cout << "You want to edit which stat? Type hp, mhp, exp, gold" << endl;
@@ -92,12 +145,12 @@ void edit_Stat(int character_input, int stat_Value) //edit hp?
 
 void edit_Inventory(int item_input, int inventory_Value)
 {
-
+    //need a check for black badges and magic carpets boolean values so swtich statment ? i guess ? 
     fin.close();
 }
 
 void max_All()
-{
+{ //long method lol.... maybe ?
 
     fin.close();
 }
