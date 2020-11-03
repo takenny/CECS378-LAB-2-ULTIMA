@@ -59,7 +59,8 @@ void edit_Stat(int input, int stat_Value) //edit hp?
         location = 0x12; //tried with higher bit value but didnt compile correctly. worked this way wrote correctly to file
 
         fin.seekp(location);
-        fin.write((char*)&stat_Value, sizeof(stat_Value));
+        fin.write((char*)&stat_Value, 2); //2 for byte block 2 for hp , max hp, exp, gold
+        //1 for byte block 1 for everything else that have one address 
      
     }
    
