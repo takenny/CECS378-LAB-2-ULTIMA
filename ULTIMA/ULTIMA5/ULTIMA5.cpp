@@ -36,7 +36,7 @@ int main()
             cin >> player;
             cout << "What Stat did you want to change? Type 1 for STR, 2 for INT, 3 for DEX, 4 for HP, 5 for MAXHP, 6 for EXP " << endl;
             cin >> stat;
-            if (stat > 5 || stat == 0)
+            if (stat > 6 || stat == 0)
             {
                 cout << "Wrong input, please try again." << endl;
             }
@@ -312,6 +312,7 @@ void edit_Inventory(int& item_input, int& inventory_Value)
         {
             location = 0x20a;
             fin.seekp(location);
+            inventory_Value = 2;
             fin.write((char*)&inventory_Value, 1);
             break;
         }
