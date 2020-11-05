@@ -1,0 +1,1 @@
+had to change gloabl variable fo fin to put in =method because it wouldnt process multiople values at once

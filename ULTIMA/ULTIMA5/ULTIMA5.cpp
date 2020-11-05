@@ -26,7 +26,6 @@ int main()
         cout << "WHAT WOULD YOU LIKE TO EDIT?" << endl;
         cout << "Type '1' to MAX the Stat on a Selected Character" << endl;
         cout << "Type '2' to Edit your Inventory" << endl;
-        cout << "Type '3' to MAX the STATS and INVENTORY" << endl;
         cin >> input;
         switch (input) { //check if this is okay  
         case 1:
