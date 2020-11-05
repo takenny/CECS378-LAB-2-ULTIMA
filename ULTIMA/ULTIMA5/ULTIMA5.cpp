@@ -1,74 +1,72 @@
-// ULTIMA5.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/**
+ * ULTIMA 5 CHEAT ENGINE
+ * CECS 378 MW 8AM
+ * Created by: KENNY TA 015020302
+*/
 
 #include <iostream>
-#include <fstream>
+#include <fstream> 
 #include <algorithm>
 
 using namespace std;
 
-//declared methods to write later
-void edit_Stat(int character_input, int stat);
-void edit_Inventory(int& item_input, int& inventory_Value);
-//void max_All();
+void edit_Stat(int character_input, int stat); //edit a certain stat method declaration
+void edit_Inventory(int& item_input, int& inventory_Value); //edit a certain inventory declaration
 
-
-
-int main()
+int main() 
 {
+    int input, exit_input; //declaration of variables
+    bool no_Exit = true; //for while loop
 
-    int input, exit_input;
-    bool exit = true;
-
-    cout << "WELCOME TO ULTIMA 5's CHEAT ENGINE" << endl;
-    while (exit)
+    cout << "WELCOME TO ULTIMA 5's CHEAT ENGINE" << endl; // initial print out of welcome screen. 
+    while (exit) //while loop so don't need to keep rerunning program to change one thing
     {
-        cout << "WHAT WOULD YOU LIKE TO EDIT?" << endl;
+        cout << "WHAT WOULD YOU LIKE TO EDIT?" << endl; 
         cout << "Type '1' to MAX the Stat on a Selected Character" << endl;
         cout << "Type '2' to Edit your Inventory" << endl;
-        cin >> input;
-        switch (input) { //check if this is okay  
+        cin >> input; 
+        switch (input) { //check input for response  
+        //case 1 handles the stat changes
         case 1:
-            int player, stat;
+            int player, stat; //used for options in switch statement 
             cout << "You have chosen to max the stats on a selected character" << endl;
             cout << "Who do you want to max? Type 1 for Player, 2 for Shamino, 3 for Iolo, 4 for Mariah, 5 for Geophry, 6 for Jaana, 7 for Julia, 8 for Dupre, 9 for Katrin, 10 for Sentri, 11 for Gwenno, 12 for John, 13 for Gorn, 14 for Maxwell, 15 for Toshi, 16 for Saduj " << endl;
-            //insert method here 
             cin >> player;
             cout << "What Stat did you want to change? Type 1 for STR, 2 for INT, 3 for DEX, 4 for HP, 5 for MAXHP, 6 for EXP " << endl;
             cin >> stat;
-            if (stat > 6 || stat == 0)
+            if (stat > 6 || stat == 0) //this if checks for a valid input
             {
                 cout << "Wrong input, please try again." << endl;
             }
-            //need to run check if stat is over max value of address 
+            //after check for valid input, checks if player is selected, if not then go to else
             if (player == 1)
             {
-                edit_Stat(player - 1, stat);
+                edit_Stat(player - 1, stat); //calls method to edit stat
+                //here logic is player-1 because told player to type 1 and the offset for player in SAVED.GAM is 0x00
             }
             else
-            {
-                //cout << "player is " << (player - 1) * 32; debugging? its wroking...? 
-                edit_Stat((player - 1) * 32, stat);
+            { 
+                edit_Stat((player - 1) * 0x20, stat); //here logic is to get other players, keep the player-1 then multiply by 0x20, or 32.
+                //noticed this pattern while finding offsets in player
             }
-            //test codew       edit_Stat(player*0x20, 990); //hp edit? 
             break;
+
         case 2:
-            int item_Input;
-            int inventory_Value;
-            cout << "You have chosen to edit your inventory" << endl;
+            int item_Input, inventory_Value; //initialization of variables for method
+            cout << "You have chosen to edit your inventory" << endl; 
             cout << "What would you like to edit? Type the item you want to edit: 1 for gold, 2 for keys, 3 for skull keys, 4 for gems, 5 for black badge, 6 for magic carpets, 7 for magic axes" << endl;
-            cin >> item_Input;
-            if (item_Input == 1)
+            cin >> item_Input; 
+            if (item_Input == 1) //error checking for overflow values / invalid entries
             {
                 cout << "How much gold do you want? MAX 9999" << endl;
                 cin >> inventory_Value;
-                if (inventory_Value > 9999)
+                if (inventory_Value > 9999) //inventory number too high, just sets to max 
                 {
                     cout << "Invalid amount, max amount allocated" << endl;
                     inventory_Value = 9999;
                 }
             }
-            else if (item_Input == 2 || item_Input == 3 || item_Input == 4)
+            else if (item_Input == 2 || item_Input == 3 || item_Input == 4) //options for keys, skull keys, and gems that ahve max of 100
             {
                 cout << "How many of each? MAX 100" << endl; //run check so doesnt go over values 
                 cin >> inventory_Value;
@@ -78,21 +76,21 @@ int main()
                     inventory_Value = 100;
                 }
             }
-            else if (item_Input == 5 || item_Input == 6) //badge and carpet? booleans 
+            else if (item_Input == 5 || item_Input == 6) //checking error for magic carpet / black badges  
             {
-                int yes_no;
+                int yes_no; //different option yes or no
                 cout << "Do you want the item? Type 1 for Yes, 2 for No" << endl;
-                cin >> yes_no;
-                if (yes_no == 1)
+                cin >> yes_no; 
+                if (yes_no == 1) //yes user wants it 
                 {
-                    inventory_Value = 0xff;
+                    inventory_Value = 0xff; 
                 }
-                else
+                else //no user doesnt want it
                 {
                     inventory_Value = 0x00;
                 }
             }
-            else if (item_Input == 7)
+            else if (item_Input == 7) //error checking for magic axes
             {
                 cout << "How many magic axes do you want? MAX 10" << endl;
                 cin >> inventory_Value;
@@ -102,63 +100,68 @@ int main()
                     inventory_Value = 10;
                 }
             }
-            else //default check 
+            else //default check for invalid entries of item input
             {
                 cout << "Invalid entry. Try Again." << endl;
             }
 
             // insert method here 
-            cout << "asodhiaosjdfsa " << item_Input << "ASDOIUJHASIDJ" << inventory_Value << endl;
-            edit_Inventory(item_Input, inventory_Value);
+            edit_Inventory(item_Input, inventory_Value); //call to method to handle editing inventory 
             break;
 
         default:
             cout << "Please input a valid option" << endl;
             return 0;
         }
-
+        //end of switch statement
+        //prompts user to continue?
         cout << "Would you like to exit? Type 1 for no, 2 for yes" << endl;
         cin >> exit_input;
         if (exit_input == 1)
         {
-            exit = true;
+            no_Exit = true; //keeps boolean the same and doesnt exit.
         }
         else
         {
-            exit = false;
+            no_Exit = false; //exits.
         }
 
     }
-    cout << "Thanks for using this program. Have a nice day!" << endl;
+    cout << "Thanks for using this program. Have a nice day!" << endl; //friendly thank you for using program
 }
 
-void edit_Stat(int character_input, int stat) //edit hp? 
+/**
+ * This method edits the stats of the characters, users are able to choose between the player or other characters to edit.
+ * This method takes two ints, the choice of character to edit, and the stat they wish to edit.
+ * This method doesn't return anything.
+*/
+void edit_Stat(int character_input, int stat) 
 {
-         char test_hp = 0x3DE;
-    fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary);
-    int location = 0;
-   // cout << "You want to edit which stat? Type hp, mhp, exp, gold" << endl;
-  //  cin >> stat_input;
-  //  transform(stat_input.begin(), stat_input.end(), stat_input.begin(), ::tolower);
-    switch (stat) //swtich statemtn for error checking of stat max value 
+    fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary); //file in for edit 
+    int location = 0; //location = 0 intially until user inputs what they want to edit
+   
+    switch (stat) //swtich statement for error checking of stat max value 
     {
         case 1: //case 1 for stat to edit, = str 
         {
-            int stat_Value;
+            int stat_Value; //initialize for how much to edit by
             cout << "How much do you want to edit this stat by? MAX = 99" << endl;
-            cin >> stat_Value;
-            if (stat_Value > 99)
+            cin >> stat_Value; 
+            if (stat_Value > 99) //error check if over max, end 
             {
                 stat_Value = 99;
                 cout << "You went too far, max STR given." << endl;
             }
-            location = character_input + 0x0e;
-            fin.seekp(location);
-            fin.write((char*)&stat_Value, 1);
+            location = character_input + 0x0e; //location of the character's STR offset 
+            //location = 0 but add character_input from method parameters, and add 0x0e where str offset is stored
+            fin.seekp(location); //seekp putting a pointer at the location in the file where str is stored. 
+            fin.write((char*)&stat_Value, 1); //wrote to the file using statvalue we wanted to change. 
+            //the 1 is there because we only want to write to one block, if we have a larger number / storage to write to, we use a different number
+            //ex. hp is stored in two blocks, so we write to both in hp's case. in the case of str, int, dex, we use 1
             break;
         }
-        case 2:
-        {
+        case 2: //case 2 int 
+        { //similar logic here as case 1 
             int stat_Value;
             cout << "How much do you want to edit this stat by? MAX = 99" << endl;
             cin >> stat_Value;
@@ -172,7 +175,7 @@ void edit_Stat(int character_input, int stat) //edit hp?
             fin.write((char*)&stat_Value, 1);
             break;
         }
-        case 3:
+        case 3: //dex similar logic as case 1 and 2 
         {
             int stat_Value;
             cout << "How much do you want to edit this stat by? MAX = 99" << endl;
@@ -187,7 +190,8 @@ void edit_Stat(int character_input, int stat) //edit hp?
             fin.write((char*)&stat_Value, 1);
             break;
         }
-        case 4:
+        case 4: //hp
+        //hp stores values in two data blocks, so added a 2 at the end of write to write the char which is generally 8 bits, into two, so 16 bits total
         {
             int stat_Value;
             cout << "How much do you want to edit this stat by? MAX = 999" << endl;
@@ -202,7 +206,7 @@ void edit_Stat(int character_input, int stat) //edit hp?
             fin.write((char*)&stat_Value, 2); //changed for hp max hp and gold 
             break;
         }
-        case 5:
+        case 5: //maxhp similar logic as above.
         {
             int stat_Value;
             cout << "How much do you want to edit this stat by? MAX = 999" << endl;
@@ -217,7 +221,7 @@ void edit_Stat(int character_input, int stat) //edit hp?
             fin.write((char*)&stat_Value, 2); //changed for hp max hp and gold 
             break;
         }
-        case 6:
+        case 6: //exp similar logic as above
         {
             int stat_Value;
             cout << "How much do you want to edit this stat by? MAX = 9999" << endl;
@@ -239,42 +243,25 @@ void edit_Stat(int character_input, int stat) //edit hp?
         }
     }
 
-    /*
-    if (stat_input == "hp" || "mhp" || "exp" || "gold") //hp for test 
-        //using 990 ? 
-    {
-        location = 0x12; //tried with higher bit value but didnt compile correctly. worked this way wrote correctly to file
-
-        fin.seekp(location);
-        fin.write((char*)&stat_Value, 2); //2 for byte block 2 for hp , max hp, exp, gold
-        //1 for byte block 1 for everything else that have one address 
-     
-    }
-    else
-    {
-        location = 0; //whatever location;
-
-        fin.seekp(location);
-        fin.write((char*)&stat_Value, 1);
-    }
-   */
-
-    fin.close();
-    //cout << hex << stat_Value << endl; 
+    fin.close();//close file to save data!
 }
 
+/**
+ * This method edits the player's inventory.
+ * This method takes two integer params, the choice of item to edit, and the inventory value.
+ * This method doesn't return anything.
+*/
 void edit_Inventory(int& item_input, int& inventory_Value)
 {
-    fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary);
-    int location = 0;
-    cout << "ITEM INPUT IS " << item_input << " and " << inventory_Value <<endl;
-    switch (item_input)
+    fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary); //open file to for editting
+    int location = 0; //location set to 0 
+    switch (item_input) //switch statement to handle all the diffferent cases
     {
         case 1: //gold 
          {
-            location = 0x204;
+            location = 0x204; //location is shared amongst different characters so did not need logic to add characters offsets
             fin.seekp(location);
-            fin.write((char*)&inventory_Value, 2);
+            fin.write((char*)&inventory_Value, 2); //gold is only item that requires two 8bit blocks of data
             break;
          }
         case 2: //keys
@@ -284,28 +271,28 @@ void edit_Inventory(int& item_input, int& inventory_Value)
             fin.write((char*)&inventory_Value, 1);
             break;
         }
-        case 3:
+        case 3: //skullkeys
         {
             location = 0x20b;
             fin.seekp(location);
             fin.write((char*)&inventory_Value, 1);
             break;
         }
-        case 4:
+        case 4: //gems
         {
             location = 0x207;
             fin.seekp(location);
             fin.write((char*)&inventory_Value, 1);
             break;
         }
-        case 5:
+        case 5: //black badges
         {
             location = 0x218;
             fin.seekp(location);
             fin.write((char*)&inventory_Value, 1);
             break;
         }
-        case 6:
+        case 6: //magic carpet 
         {
             location = 0x20a;
             fin.seekp(location);
@@ -313,7 +300,7 @@ void edit_Inventory(int& item_input, int& inventory_Value)
             fin.write((char*)&inventory_Value, 1);
             break;
         }
-        case 7:
+        case 7: //magic axes
         {
             location = 0x240;
             fin.seekp(location);
@@ -326,19 +313,7 @@ void edit_Inventory(int& item_input, int& inventory_Value)
         }
     }
    
-    //need a check for black badges and magic carpets boolean values so swtich statment ? i guess ? 
     fin.close();
 }
 
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+//end 

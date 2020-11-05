@@ -1,1 +1,18 @@
+used c++ cause easier to find location in file and edit
+
 had to change gloabl variable fo fin to put in =method because it wouldnt process multiople values at once
+
+edit_Inventory uses pass by parameters so im passing the whole thing in, had an issue with it not working earlier so i tried a few things and this worked
+
+was going to run error check in method, but figured easier to do it in case statment for edit edit_Inventory\
+
+
+    //need a check for black badges and magic carpets boolean values so swtich statment ? i guess ? 
+
+// cout << "You want to edit which stat? Type hp, mhp, exp, gold" << endl;
+  //  cin >> stat_input;
+  //  transform(stat_input.begin(), stat_input.end(), stat_input.begin(), ::tolower);
+
+  fin.close to save data otherwise wont write lol
+
+  
