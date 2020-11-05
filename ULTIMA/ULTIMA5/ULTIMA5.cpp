@@ -10,12 +10,13 @@ using namespace std;
 //declared methods to write later
 void edit_Stat(int character_input, int stat);
 void edit_Inventory(int& item_input, int& inventory_Value);
-void max_All();
+//void max_All();
 
-fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary);
+
 
 int main()
 {
+
     int input, exit_input;
     bool exit = true;
 
@@ -47,7 +48,8 @@ int main()
             }
             else
             {
-                edit_Stat((player - 1) * 0x20, stat);
+                //cout << "player is " << (player - 1) * 32; debugging? its wroking...? 
+                edit_Stat((player - 1) * 32, stat);
             }
             //test codew       edit_Stat(player*0x20, 990); //hp edit? 
             break;
@@ -111,11 +113,6 @@ int main()
             edit_Inventory(item_Input, inventory_Value);
             break;
 
-        case 3:
-            //insert method here 
-            max_All();
-            cout << "You have maxed your stats and inventory!" << endl;
-
         default:
             cout << "Please input a valid option" << endl;
             return 0;
@@ -139,7 +136,7 @@ int main()
 void edit_Stat(int character_input, int stat) //edit hp? 
 {
          char test_hp = 0x3DE;
-   
+    fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary);
     int location = 0;
    // cout << "You want to edit which stat? Type hp, mhp, exp, gold" << endl;
   //  cin >> stat_input;
@@ -269,6 +266,7 @@ void edit_Stat(int character_input, int stat) //edit hp?
 
 void edit_Inventory(int& item_input, int& inventory_Value)
 {
+    fstream fin("SAVED.GAM", ios::in | ios::out | ios::binary);
     int location = 0;
     cout << "ITEM INPUT IS " << item_input << " and " << inventory_Value <<endl;
     switch (item_input)
@@ -333,11 +331,6 @@ void edit_Inventory(int& item_input, int& inventory_Value)
     fin.close();
 }
 
-void max_All()
-{ //long method lol.... maybe ?
-
-    fin.close();
-}
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -1,4 +1,4 @@
 ﻿  ULTIMA5.cpp
-C:\Users\kta67\Desktop\CECS378\CECS378-LAB-2-ULTIMA\ULTIMA\ULTIMA5\ULTIMA5.cpp(141,30): warning C4305: 'initializing': truncation from 'int' to 'char'
-C:\Users\kta67\Desktop\CECS378\CECS378-LAB-2-ULTIMA\ULTIMA\ULTIMA5\ULTIMA5.cpp(141,25): warning C4309: 'initializing': truncation of constant value
+C:\Users\kta67\Desktop\CECS378\CECS378-LAB-2-ULTIMA\ULTIMA\ULTIMA5\ULTIMA5.cpp(138,30): warning C4305: 'initializing': truncation from 'int' to 'char'
+C:\Users\kta67\Desktop\CECS378\CECS378-LAB-2-ULTIMA\ULTIMA\ULTIMA5\ULTIMA5.cpp(138,25): warning C4309: 'initializing': truncation of constant value
   ULTIMA5.vcxproj -> C:\Users\kta67\Desktop\CECS378\CECS378-LAB-2-ULTIMA\ULTIMA\Debug\ULTIMA5.exe
