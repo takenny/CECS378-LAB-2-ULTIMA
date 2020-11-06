@@ -19,7 +19,7 @@ int main()
     bool no_Exit = true; //for while loop
 
     cout << "WELCOME TO ULTIMA 5's CHEAT ENGINE" << endl; // initial print out of welcome screen. 
-    while (exit) //while loop so don't need to keep rerunning program to change one thing
+    while (no_Exit) //while loop so don't need to keep rerunning program to change one thing
     {
         cout << "WHAT WOULD YOU LIKE TO EDIT?" << endl; 
         cout << "Type '1' to MAX the Stat on a Selected Character" << endl;
