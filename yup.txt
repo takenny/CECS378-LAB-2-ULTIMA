@@ -15,4 +15,26 @@ was going to run error check in method, but figured easier to do it in case stat
 
   fin.close to save data otherwise wont write lol
 
-  
+    When I was doing this project or, thinking about how to do it, I initially wanted to use Java,
+    the language I am most comfortable in. But then I saw that I had to read in the whole file, and 
+    then edit it from there but I did not want to do that. Then I found that in C++ I can find the
+    location of certain things I wanted to edit and edit them from there using pointers, so I decided
+    on C++. I also had to change my file in from being a global variable to putting them into the method
+    then closing after the method is finished so the data that gets altered is stored. The first time I 
+    tried running the program the method did not save the editted information so I had to find another way
+    to open and close and decided ultimately to call file in inside the methods. 
+
+    I actually found online the offsets for each characters and their abilities. But I did double check
+    whether the information I found online matches each character. I noticed a pattern when I was looking
+    through the information in the HEX editor. For example, the stats for another character would be in a
+    multipe of 0x20. Shamino's stats are 0x20 away from the players and so forth. 
+
+    I gave the user the ability to edit certain character's stats and their respective inventories.
+    In my save file, I have changed the stats of each of the three characters the player starts
+    off with to their maxed values, and also maxed the inventories. The user of the program however,
+    may edit this information themselves if they wish to. The end results was maxed stats for player,
+    Shamino, and Iolo, and their inventories maxed as well. 
+
+    I found this project to be one of the more interesting, if not, the most interesting
+    project in my CECS career here. I have always been interested in hacking games and 
+    editting their values and this project allowed me to learn more about that. 
